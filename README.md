@@ -1,5 +1,7 @@
 # Fuze Terraform Provider
 
+**NOTE**: *This fork updates the outdated code of the root branch to work with latest version of the ignition code… I still need to send a PR*
+
 The Fuze provider exposes data sources to render [Ignition] [1]
 configurations in the human-friendly [Fuze] [2] YAML format into
 JSON.  The rendered JSON strings can be used as input to other

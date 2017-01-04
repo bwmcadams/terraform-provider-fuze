@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/coreos/terraform-provider-fuze/fuze"
+	"github.com/bwmcadams/terraform-provider-fuze/fuze"
 	"github.com/hashicorp/terraform/plugin"
 )
 
