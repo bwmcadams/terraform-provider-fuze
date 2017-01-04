@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
   "errors"
+  "fmt"
 
 	fuze "github.com/coreos/container-linux-config-transpiler/config"
 	"github.com/hashicorp/terraform/helper/hashcode"
@@ -58,10 +59,12 @@ func renderFuzeConfig(d *schema.ResourceData) (string, error) {
 		return string(ignitionJSON), pErr
 	}
 
+  fmt.Println(ignition)
   converted, cR := fuze.ConvertAs2_0_0(ignition)
 	if len(cR.Entries) > 0 {
 		return "", errors.New(cR.String())
 	}
+  fmt.Println(converted)
 
 	ignitionJSON, mErr := json.Marshal(&converted)
 	return string(ignitionJSON), mErr
