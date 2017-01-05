@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"strconv"
   "errors"
-  "fmt"
 
 	fuze "github.com/coreos/container-linux-config-transpiler/config"
 	"github.com/hashicorp/terraform/helper/hashcode"
