@@ -50,13 +50,13 @@ func renderFuzeConfig(d *schema.ResourceData) (string, error) {
 
 	ignition1, pR := fuze.Parse([]byte(config))
 	if len(pR.Entries) > 0 {
-    return "", errors.New("Initial Fuze to Ignition 1.0 conversion:\n" + pR.String())
+    return "", errors.New("Initial Fuze to Ignition 1.0 conversion failed:\n" + pR.String())
 	}
 
   // Convert to the 2.0 ignition format
   ignition, cR := fuze.ConvertAs2_0_0(ignition1)
 	if len(cR.Entries) > 0 {
-    return "", errors.New("Conversion of Ignition 1.0 JSON to Ignition 2.0 JSON:\n" + cR.String())
+    return "", errors.New("Conversion of Ignition 1.0 JSON to Ignition 2.0 JSON failed:\n" + cR.String())
 	}
 
 	if pretty {
