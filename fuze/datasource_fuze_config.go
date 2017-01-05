@@ -50,7 +50,7 @@ func renderFuzeConfig(d *schema.ResourceData) (string, error) {
 	config := d.Get("content").(string)
 
 
-  fmt.Printf("Initial raw YAML Fuze file:\n %s", config)
+  return "", errors.New(fmt.Sprintf("Initial raw YAML Fuze file:\n %s", config))
 
 	ignition1, pR := fuze.Parse([]byte(config))
 	if len(pR.Entries) > 0 {
