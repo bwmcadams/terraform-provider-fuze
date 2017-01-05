@@ -48,9 +48,15 @@ func renderFuzeConfig(d *schema.ResourceData) (string, error) {
 	pretty := d.Get("pretty_print").(bool)
 	config := d.Get("content").(string)
 
-	ignition, pR := fuze.Parse([]byte(config))
+	ignition1, pR := fuze.Parse([]byte(config))
 	if len(pR.Entries) > 0 {
 		return "", errors.New(pR.String())
+	}
+
+  // Convert to the 2.0 ignition format
+  ignition, cR := fuze.ConvertAs2_0_0(ignition1)
+	if len(cR.Entries) > 0 {
+		return "", errors.New(cR.String())
 	}
 
 	if pretty {
@@ -58,12 +64,8 @@ func renderFuzeConfig(d *schema.ResourceData) (string, error) {
 		return string(ignitionJSON), pErr
 	}
 
-  converted, cR := fuze.ConvertAs2_0_0(ignition)
-	if len(cR.Entries) > 0 {
-		return "", errors.New(cR.String())
-	}
 
-	ignitionJSON, mErr := json.Marshal(&converted)
+	ignitionJSON, mErr := json.Marshal(&ignition)
 	return string(ignitionJSON), mErr
 }
 
