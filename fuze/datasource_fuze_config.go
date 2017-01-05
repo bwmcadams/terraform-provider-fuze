@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
   "errors"
+  "fmt"
 
 	fuze "github.com/coreos/container-linux-config-transpiler/config"
 	"github.com/hashicorp/terraform/helper/hashcode"
@@ -47,6 +48,9 @@ func dataSourceFuzeConfigRead(d *schema.ResourceData, meta interface{}) error {
 func renderFuzeConfig(d *schema.ResourceData) (string, error) {
 	pretty := d.Get("pretty_print").(bool)
 	config := d.Get("content").(string)
+
+
+  fmt.Printf("Initial raw YAML Fuze file:\n %s", config)
 
 	ignition1, pR := fuze.Parse([]byte(config))
 	if len(pR.Entries) > 0 {
